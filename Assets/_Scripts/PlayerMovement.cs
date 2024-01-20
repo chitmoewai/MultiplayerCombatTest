@@ -47,8 +47,6 @@ public class PlayerMovement : MonoBehaviourPun
 
             horizontalInput = rb.velocity.x;
 
-            Debug.Log(rb.velocity.x);
-
             //Flip player when moving left - right
             if (!isFacingRight && horizontalInput > 0f)
             {

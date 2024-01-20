@@ -136,7 +136,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);// Update the player list UI
     }
 
-   
+    public void Shoot()
+    {
+        localPlayer.GetComponent<PhotonView>().RPC("AttackRPC", RpcTarget.AllBuffered, photonView.Owner.NickName);
+    }
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();

@@ -34,37 +34,24 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - AttackRPC
   - ClickRpc
+  - Deactivate
+  - Dead
   - DestroyRpc
   - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - Flip
-  - Attack
-  - ChangeDir
-  - SetDirection
-  - ChangeDirLeft
-  - Deactivate
-  - ReduceHealth
-  - Dead
-  - Respawn
-  - SwitchNextWeaponRPC
-  - SwitchPreviousWeaponRPC
-  - CurrentWeaponRPC
-  - SwitchWeaponRPC
-  - InitializeCountdownRPC
   - EndGameRPC
-  - FlipPlayerSprite
-  - DeclareWinnerRPC
-  - UpdateKillCountRPC
-  - UpdateLeaderRPC
-  - UpdatePlayerList
-  - UpdatePlayerListRPC
+  - Fire
+  - Flip
+  - InitializeCountdownRPC
+  - LoadGameScene
+  - ReduceHealth
+  - Respawn
+  - RespawnSpaceship
+  - StartRematchRPC
+  - SwitchWeaponRPC
   - UpdateKillCount
   - UpdatePlayersInfo
-  - LoadGameScene
-  - StartRematchRPC
-  - AttackRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
