@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        float randomValue = Random.Range(-1f, 4f);
+        float randomValue = Random.Range(-1f, 1f);
         PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(transform.position.x*randomValue, transform.position.y), Quaternion.identity,0);
 
         gameStartUIPanel.SetActive(false);
@@ -134,9 +134,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             playerKillCounts[playerName] = newKillCount;
         }
-        // Update the player list UI
-        //UpdatePlayersInfo();
-        photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);
+        
+        photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);// Update the player list UI
     }
 
    

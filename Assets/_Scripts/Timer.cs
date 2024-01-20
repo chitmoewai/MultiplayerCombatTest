@@ -7,7 +7,7 @@ using Photon.Pun;
 public class Timer : MonoBehaviourPun
 {
     public TextMeshProUGUI timerText;
-    private float countdownTime = 10f; // 2 minutes in seconds
+    private float countdownTime = 60f; // 2 minutes in seconds
     private bool IsGameEnd = false;
 
     void Start()

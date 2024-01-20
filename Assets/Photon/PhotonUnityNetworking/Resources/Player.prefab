@@ -1137,7 +1137,7 @@ MonoBehaviour:
   groundCheck: {fileID: 633041008445041969}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   playerNameTransform: {fileID: 3507251537454808628}
   DisableInput: 0
 --- !u!114 &2927036704890445597
