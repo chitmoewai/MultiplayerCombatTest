@@ -18,21 +18,26 @@ public class PlayerAttack : MonoBehaviourPun
         if (photonView.IsMine)
         {
             if (Input.GetMouseButtonDown(0))
-                photonView.RPC("Attack", RpcTarget.AllBuffered, photonView.Owner.NickName);
+                photonView.RPC("AttackRPC", RpcTarget.AllBuffered, photonView.Owner.NickName);
                 
         }
       
     }
 
     [PunRPC]
+    private void AttackRPC(string attackerName)
+    {
+        Attack(attackerName);
+    }
+
     private void Attack(string attackerName)
     {
         Debug.Log($"CurrentWeapon and index : {GetComponent<WeaponHolder>().currentWeapon} : {GetComponent<WeaponHolder>().currentWeaponIndex}");
-        if(GetComponent<WeaponHolder>().currentWeaponIndex == 0)
+        if (GetComponent<WeaponHolder>().currentWeaponIndex == 0)
         {
             bullets[FindBullet()].transform.position = firePos.position;
             bullets[FindBullet()].GetComponent<Projectile>().speed = 50;
-            bullets[FindBullet()].GetComponent<Projectile>().bulletDamage = 10;
+            bullets[FindBullet()].GetComponent<Projectile>().bulletDamage = 5;
             bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x), attackerName); // as the direction of player is facing
         }
         if (GetComponent<WeaponHolder>().currentWeaponIndex == 1)

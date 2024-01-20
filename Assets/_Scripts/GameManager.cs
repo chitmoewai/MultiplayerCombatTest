@@ -206,5 +206,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("GameScene");
         }
+        else
+        {
+            Debug.Log("Other Player Left the room");
+        }
     }
 }
