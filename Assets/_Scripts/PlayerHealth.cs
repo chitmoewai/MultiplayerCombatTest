@@ -129,6 +129,15 @@ public class PlayerHealth : MonoBehaviourPun
         //UpdateUI();
     }
 
+    //Player is Dead in water
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Water")
+        {
+            Debug.Log("Player is dead in water");
+            photonView.RPC("Dead", RpcTarget.AllBuffered);
+        }
+    }
 
-   
+
 }

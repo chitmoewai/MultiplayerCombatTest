@@ -18,8 +18,6 @@ public class MainMenuController : MonoBehaviourPunCallbacks
    
 
     [SerializeField] private TMP_InputField UsernameInput;
-    [SerializeField] private TMP_InputField CreateGameInput;
-    [SerializeField] private TMP_InputField JoinGameInput;
 
     [SerializeField] private GameObject StartButton;
 

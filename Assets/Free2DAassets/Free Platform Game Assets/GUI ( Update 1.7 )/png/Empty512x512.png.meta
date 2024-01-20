@@ -160,7 +160,7 @@ TextureImporter:
         width: 269
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,6 +168,27 @@ TextureImporter:
       bones: []
       spriteID: 8d282d5ce2c904c22a4a7d396f13f96b
       internalID: 579960506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttonYellowSmall
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 280
+        width: 158
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d9d2c08cc354665b1c1202ddbb30a7
+      internalID: 1421258205
       vertices: []
       indices: 
       edges: []
@@ -186,6 +207,7 @@ TextureImporter:
       ButtonRed: 1796028491
       ButtonYellowBig: 2095789277
       buttonRedbig: 579960506
+      buttonYellowSmall: 1421258205
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
