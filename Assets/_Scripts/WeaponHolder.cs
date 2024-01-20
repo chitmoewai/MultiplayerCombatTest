@@ -31,29 +31,20 @@ public class WeaponHolder : MonoBehaviourPun
         if (!photonView.IsMine)
             return;
 
-        //next Weapon
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))//next Weapon
         {
             if (currentWeaponIndex < totalWeapons - 1)
             {
                 weapons[currentWeaponIndex].SetActive(false);
                 currentWeaponIndex += 1;
-            //    weapons[currentWeaponIndex].SetActive(true);
-
-            //    currentWeapon = weapons[currentWeaponIndex];
             }
-            //if (photonView.IsMine)
-            //photonView.RPC("SwitchNextWeaponRPC", RpcTarget.AllBuffered);
         }
-        //Previous Weapon
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))//Previous Weapon
         {
             if (currentWeaponIndex > 0)
             {
                 weapons[currentWeaponIndex].SetActive(false);
                 currentWeaponIndex -= 1;
-            //    weapons[currentWeaponIndex].SetActive(true);
-            //    currentWeapon = weapons[currentWeaponIndex];
             }
           
         }

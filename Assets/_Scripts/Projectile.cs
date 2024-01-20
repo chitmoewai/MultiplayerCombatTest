@@ -44,14 +44,9 @@ public class Projectile : MonoBehaviourPun
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //hit = true;
-        //boxCollider.enabled = false;
-        //Deactivate();
-
         if (!photonView.IsMine)
             return;
 
-       
         PhotonView target = collision.gameObject.GetComponent<PhotonView>();
 
         if(target != null && (!target.IsMine || target.IsRoomView))
@@ -60,7 +55,7 @@ public class Projectile : MonoBehaviourPun
             {
                 target.RPC("ReduceHealth", RpcTarget.AllBuffered, bulletDamage, _attackerName);
             }
-            //photonView.RPC("Deactivate",RpcTarget.AllBuffered);
+           
         }
     }
 
@@ -74,17 +69,10 @@ public class Projectile : MonoBehaviourPun
         lifetime = 0;
 
         _attackerName = attackerName;
-        //Debug.Log($"Direction : {direction} ");
-
-        // bullet sprite ko flip tr basically
-        //float localScaleX = transform.localScale.x;
-        //if (Mathf.Sign(localScaleX) != _direction)
-        //    localScaleX = -localScaleX;
-
+      
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
     }
-
 
     [PunRPC]
     private void Deactivate()

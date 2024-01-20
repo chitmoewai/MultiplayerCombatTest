@@ -31,8 +31,6 @@ public class PlayerHealth : MonoBehaviourPun
         {
             GameManager.Instance.localPlayer = this.gameObject;
         }
-
-        //UpdateKillCountUI();
     }
 
   
@@ -47,17 +45,14 @@ public class PlayerHealth : MonoBehaviourPun
     {
         fillImage.fillAmount = HealthAmount / 100f;
 
-        //Player is dead
-        if(photonView.IsMine && HealthAmount <= 0)
+        if(photonView.IsMine && HealthAmount <= 0) //Player is dead
         {
             playerMovement.DisableInput = true;
 
             IncrementKillCount(_killerName);
 
-            // Send RPC to notify all players about the death
-            photonView.RPC("Dead", RpcTarget.AllBuffered);
+            photonView.RPC("Dead", RpcTarget.AllBuffered); // Send RPC to notify all players about the death
 
-            //GameManager.Instance.EnableRespawn();
         }
     }
 
@@ -84,7 +79,6 @@ public class PlayerHealth : MonoBehaviourPun
     [PunRPC]
     private void Respawn()
     {
-        //respawn nay tone mhane thwr ag
         rb.gravityScale = 1;
         boxCollider.enabled = true;
         spriteRender.enabled = true;
@@ -115,29 +109,16 @@ public class PlayerHealth : MonoBehaviourPun
     void IncrementKillCount(string playerName)
     {
         killCount++;
-
-        // Update kill count for all players
-        photonView.RPC("UpdateKillCount", RpcTarget.AllBuffered, playerName,killCount);
+        photonView.RPC("UpdateKillCount", RpcTarget.AllBuffered, playerName,killCount);// Update kill count for all players
     }
 
     [PunRPC]
     void UpdateKillCount(string playerName, int newKillCount)
     {
-        // Called on all players when a kill occurs
         killCount = newKillCount;
         GameManager.Instance.UpdateKillCount(playerName, killCount);
-        //UpdateUI();
     }
 
-    ////Player is Dead in water
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Water")
-    //    {
-    //        Debug.Log("Player is dead in water");
-    //        photonView.RPC("Dead", RpcTarget.AllBuffered);
-    //    }
-    //}
 
 
 }

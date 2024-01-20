@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private Transform playerNameTransform;
     private float horizontalInput;
 
-    public bool DisableInput = false; // when player die can't move anymore
+    public bool DisableInput = false;
 
     private void Awake()
     {
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviourPun
                 photonView.RPC("Flip", RpcTarget.AllBuffered);
                
             }
-            else if (isFacingRight && horizontalInput < 0f) // left
+            else if (isFacingRight && horizontalInput < 0f) 
             {
                 photonView.RPC("Flip", RpcTarget.AllBuffered);
             }
@@ -79,9 +79,6 @@ public class PlayerMovement : MonoBehaviourPun
     [PunRPC]
     private void Flip()
     {
-        //isFacingRight = !isFacingRight;
-        //playerBodySpriteRender.flipX = !isFacingRight;
-
         isFacingRight = !isFacingRight;
         Vector3 localScale = transform.localScale;
         localScale.x *= -1f;

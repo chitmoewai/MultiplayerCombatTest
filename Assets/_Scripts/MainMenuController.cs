@@ -30,7 +30,6 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     private void Start()
     {
         LoadingPanel.SetActive(true);
-        //UsernameMenuPanel.SetActive(true);
     }
 
     public void ChangeUserNameInput()
@@ -74,21 +73,25 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         LoadingPanel.SetActive(false);
         UsernameMenuPanel.SetActive(true);
         Debug.Log("OnJoinLobby");
-        //load lobby scene or show lobby panel
+      
     }
-
-
     public override void OnJoinedRoom()
     {
         WaitingRoomPanel.SetActive(true);
         if (PhotonNetwork.CurrentRoom.PlayerCount != MaxPlayersPerRoom)
             waitText.text = $"Waiting for {MaxPlayersPerRoom - PhotonNetwork.CurrentRoom.PlayerCount} players...";
 
-        // Synchronize the "GameScene" load operation across all players
-
         photonView.RPC("LoadGameScene", RpcTarget.AllBufferedViaServer);
 
     }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        // If no rooms are available, create a new one
+        CreateRoom();
+    }
+
+    #endregion
 
     [PunRPC]
     private void LoadGameScene()
@@ -99,13 +102,6 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        // If no rooms are available, create a new one
-        CreateRoom();
-    }
-
-    #endregion
 }
 
 

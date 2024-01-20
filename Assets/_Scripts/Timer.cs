@@ -18,18 +18,14 @@ public class Timer : MonoBehaviourPun
 
     void Update()
     {
-        //if (photonView.IsMine)
-
         countdownTime -= Time.deltaTime;
 
-        // Ensure the timer doesn't go below zero
-        countdownTime = Mathf.Max(countdownTime, 0f);
+        countdownTime = Mathf.Max(countdownTime, 0f);// Ensure the timer doesn't go below zero
 
         UpdateTimerDisplay();
 
-        if (countdownTime <= 0f && !IsGameEnd)
+        if (countdownTime <= 0f && !IsGameEnd)// Time is up
         {
-            // Time is up, implement your game end logic here
             photonView.RPC("EndGameRPC", RpcTarget.AllBuffered);
         }
     }
