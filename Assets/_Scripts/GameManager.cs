@@ -192,4 +192,19 @@ public class GameManager : MonoBehaviourPunCallbacks
         LeaveRoom();
        
     }
+
+    public void Rematch()
+    {
+        Debug.Log($"To rematch : check current player count in this room" + PhotonNetwork.CurrentRoom.PlayerCount);
+        photonView.RPC("LoadGameScene", RpcTarget.AllBufferedViaServer);
+    }
+
+    [PunRPC]
+    private void LoadGameScene()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            PhotonNetwork.LoadLevel("GameScene");
+        }
+    }
 }
