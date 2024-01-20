@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     private Rigidbody2D rb;
 
-    [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float moveSpeed = 800f;
     [SerializeField] private float jumpingPower = 16f;
 
     [SerializeField] private bool isFacingRight = true;
@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviourPun
             rb.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb.velocity.y);
 
             horizontalInput = rb.velocity.x;
+
+            Debug.Log(rb.velocity.x);
 
             //Flip player when moving left - right
             if (!isFacingRight && horizontalInput > 0f)

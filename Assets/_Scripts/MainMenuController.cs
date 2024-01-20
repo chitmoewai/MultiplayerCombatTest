@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class MainMenuController : MonoBehaviourPunCallbacks
 {
-    private int MaxPlayersPerRoom = 2;
+    private int MaxPlayersPerRoom = 1;
 
     [SerializeField] private GameObject ConnectPanel;
     [SerializeField] private GameObject WaitingRoomPanel;
@@ -53,20 +53,6 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRandomRoom();
     }
-
-    //public void CreateGame()
-    //{
-    //    PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions { MaxPlayers = 3 }, null);
-    //}
-
-    //public void JoinGame()
-    //{
-    //    RoomOptions roomOptions = new RoomOptions();
-    //    roomOptions.MaxPlayers = 3;
-    //    PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text,roomOptions, TypedLobby.Default);
-    //}
-
-
     private void CreateRoom()
     {
         string roomName = "Room" + Random.Range(1000, 10000);
@@ -121,3 +107,18 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     #endregion
 }
+
+
+
+
+//public void CreateGame()
+//{
+//    PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions { MaxPlayers = 3 }, null);
+//}
+
+//public void JoinGame()
+//{
+//    RoomOptions roomOptions = new RoomOptions();
+//    roomOptions.MaxPlayers = 3;
+//    PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text,roomOptions, TypedLobby.Default);
+//}
