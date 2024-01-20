@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviourPun
     {
         if (photonView.IsMine && !DisableInput)
         {
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+
             //Flip player when moving left - right
             if (!isFacingRight && horizontalInput > 0f)
             {
@@ -71,17 +73,11 @@ public class PlayerMovement : MonoBehaviourPun
     }
     private void FixedUpdate()
     {
-        if (photonView.IsMine && !DisableInput)
-        {
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
 
-            horizontalInput = rb.velocity.x;
-
-
-            // Clamp the player's position to stay within the defined range.
-            float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-            transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
-        }
+        // Clamp the player's position to stay within the defined range.
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 
     private bool IsGrounded()

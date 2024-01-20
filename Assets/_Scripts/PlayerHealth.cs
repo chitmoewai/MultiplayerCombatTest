@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviourPun
     public GameObject playerCanvas;
 
     public Rigidbody2D rb;
+    public GameObject character;
     public BoxCollider2D boxCollider;
     public SpriteRenderer spriteRender;
     public GameObject weaponHolder;
@@ -68,11 +69,12 @@ public class PlayerHealth : MonoBehaviourPun
         boxCollider.enabled = false;
         spriteRender.enabled = false;
         weaponHolder.SetActive(false);
+        character.SetActive(false);
 
         playerCanvas.SetActive(false);
 
         if(photonView.IsMine)
-            GameManager.Instance.EnableRespawn();//
+            GameManager.Instance.EnableRespawn();
 
     }
 
@@ -84,6 +86,7 @@ public class PlayerHealth : MonoBehaviourPun
         spriteRender.enabled = true;
         weaponHolder.SetActive(true);
         playerCanvas.SetActive(true);
+        character.SetActive(true);
 
         fillImage.fillAmount = 1f;
         HealthAmount = 100;
