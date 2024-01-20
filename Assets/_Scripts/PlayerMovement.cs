@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviourPun
 
     public bool DisableInput = false;
 
+    private float minX = -35f; 
+    private float maxX = 35f;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,15 +41,11 @@ public class PlayerMovement : MonoBehaviourPun
         }
             
     }
-
+   
     void Update()
     {
         if (photonView.IsMine && !DisableInput)
         {
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb.velocity.y);
-
-            horizontalInput = rb.velocity.x;
-
             //Flip player when moving left - right
             if (!isFacingRight && horizontalInput > 0f)
             {
@@ -69,6 +68,20 @@ public class PlayerMovement : MonoBehaviourPun
             }
         }
       
+    }
+    private void FixedUpdate()
+    {
+        if (photonView.IsMine && !DisableInput)
+        {
+            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * moveSpeed, rb.velocity.y);
+
+            horizontalInput = rb.velocity.x;
+
+
+            // Clamp the player's position to stay within the defined range.
+            float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+            transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+        }
     }
 
     private bool IsGrounded()
