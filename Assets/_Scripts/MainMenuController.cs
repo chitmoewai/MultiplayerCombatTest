@@ -6,10 +6,16 @@ using Photon.Realtime;
 
 public class MainMenuController : MonoBehaviourPunCallbacks
 {
+    private int MaxPlayersPerRoom = 2;
+
+    [SerializeField] private GameObject ConnectPanel;
+    [SerializeField] private GameObject WaitingRoomPanel;
+    [SerializeField] private TextMeshProUGUI waitText;
+
 
     [SerializeField] private GameObject LoadingPanel;
     [SerializeField] private GameObject UsernameMenuPanel;
-    [SerializeField] private GameObject ConnectPanel;
+   
 
     [SerializeField] private TMP_InputField UsernameInput;
     [SerializeField] private TMP_InputField CreateGameInput;
@@ -17,6 +23,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject StartButton;
 
+    
     private void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -40,19 +47,35 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     {
         UsernameMenuPanel.SetActive(false);
         PhotonNetwork.NickName = UsernameInput.text;
+
+        ConnectPanel.SetActive(true);
+      
+    }
+    public void StartRandomMatchmaking()
+    {
+        PhotonNetwork.JoinRandomRoom();
     }
 
-    public void CreateGame()
+    //public void CreateGame()
+    //{
+    //    PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions { MaxPlayers = 3 }, null);
+    //}
+
+    //public void JoinGame()
+    //{
+    //    RoomOptions roomOptions = new RoomOptions();
+    //    roomOptions.MaxPlayers = 3;
+    //    PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text,roomOptions, TypedLobby.Default);
+    //}
+
+
+    private void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions { MaxPlayers = 5 }, null);
+        string roomName = "Room" + Random.Range(1000, 10000);
+        RoomOptions roomOptions = new RoomOptions { MaxPlayers = MaxPlayersPerRoom };
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
 
-    public void JoinGame()
-    {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 5;
-        PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text,roomOptions, TypedLobby.Default);
-    }
 
     #region PhotonCallbacks
     public override void OnConnectedToMaster()
@@ -70,17 +93,33 @@ public class MainMenuController : MonoBehaviourPunCallbacks
         //load lobby scene or show lobby panel
     }
 
+
     public override void OnJoinedRoom()
     {
-        Debug.Log("OnJoinRoom");
-        PhotonNetwork.LoadLevel("GameScene");
-        Debug.Log(PhotonNetwork.CountOfPlayers);
+        WaitingRoomPanel.SetActive(true);
+        if (PhotonNetwork.CurrentRoom.PlayerCount != MaxPlayersPerRoom)
+            waitText.text = $"Waiting for {MaxPlayersPerRoom - PhotonNetwork.CurrentRoom.PlayerCount} players...";
+
+        // Synchronize the "GameScene" load operation across all players
+
+        photonView.RPC("LoadGameScene", RpcTarget.AllBufferedViaServer);
+
     }
 
-    public override void OnCreatedRoom()
+    [PunRPC]
+    private void LoadGameScene()
     {
-        Debug.Log("OnCreateRoomCallback");
+        if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
+        {
+            PhotonNetwork.LoadLevel("GameScene");
+        }
     }
-   
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        // If no rooms are available, create a new one
+        CreateRoom();
+    }
+
     #endregion
 }

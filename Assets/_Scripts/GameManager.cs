@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance;
 
-    
     public GameObject PlayerPrefab;
     public GameObject gameStartUIPanel;
     public GameObject disconnectUIPanel;
@@ -32,13 +31,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public GameObject winnerPanel;
     public TextMeshProUGUI winnerNameText;
-   
+
     private Dictionary<string, int> playerKillCounts = new Dictionary<string, int>(); // Dictionary to store kill counts for each player
 
     private void Awake()
     {
         Instance = this;
-        gameStartUIPanel.SetActive(true);
+
+        SpawnPlayer();
 
         photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);
     }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        float randomValue = Random.Range(-2f, 4f);
+        float randomValue = Random.Range(-1f, 4f);
         PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(transform.position.x*randomValue, transform.position.y), Quaternion.identity,0);
 
         gameStartUIPanel.SetActive(false);
@@ -193,9 +193,4 @@ public class GameManager : MonoBehaviourPunCallbacks
         LeaveRoom();
        
     }
-    public void RestartGame()
-    {
-        PhotonNetwork.LoadLevel(PhotonNetwork.CurrentRoom.Name);
-    }
-
 }
