@@ -27,9 +27,22 @@ public class PlayerAttack : MonoBehaviourPun
     [PunRPC]
     private void Attack(string attackerName)
     {
-        bullets[FindBullet()].transform.position = firePos.position;
-        bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x), attackerName); // as the direction of player is facing
-        
+        Debug.Log($"CurrentWeapon and index : {GetComponent<WeaponHolder>().currentWeapon} : {GetComponent<WeaponHolder>().currentWeaponIndex}");
+        if(GetComponent<WeaponHolder>().currentWeaponIndex == 0)
+        {
+            bullets[FindBullet()].transform.position = firePos.position;
+            bullets[FindBullet()].GetComponent<Projectile>().speed = 30;
+            bullets[FindBullet()].GetComponent<Projectile>().bulletDamage = 10;
+            bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x), attackerName); // as the direction of player is facing
+        }
+        if (GetComponent<WeaponHolder>().currentWeaponIndex == 1)
+        {
+            Debug.Log("BombScript and Bomb");
+            bullets[FindBullet()].transform.position = firePos.position;
+            bullets[FindBullet()].GetComponent<Projectile>().speed = 20;
+            bullets[FindBullet()].GetComponent<Projectile>().bulletDamage = 50;
+            bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x), attackerName);
+        }
     }
 
     private int FindBullet()

@@ -6,8 +6,8 @@ using Photon.Pun;
 public class Projectile : MonoBehaviourPun
 {
 
-    [SerializeField] private float speed;
-    [SerializeField] private float bulletDamage;
+    public float speed;
+    public float bulletDamage;
     private BoxCollider2D boxCollider;
     
     private bool hit;
