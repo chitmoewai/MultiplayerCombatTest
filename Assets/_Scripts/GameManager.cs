@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance;
 
     public GameObject PlayerPrefab;
-    public GameObject gameStartUIPanel;
     public GameObject disconnectUIPanel;
     public GameObject SceneCamera;
 
@@ -96,7 +95,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         float randomValue = Random.Range(-1f, 1f);
         PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(transform.position.x*randomValue, transform.position.y), Quaternion.identity,0);
 
-        gameStartUIPanel.SetActive(false);
         SceneCamera.SetActive(false);
     }
 

@@ -6,7 +6,7 @@ using Photon.Realtime;
 
 public class MainMenuController : MonoBehaviourPunCallbacks
 {
-    private int MaxPlayersPerRoom = 1;
+    private int MaxPlayersPerRoom = 2;
 
     [SerializeField] private GameObject ConnectPanel;
     [SerializeField] private GameObject WaitingRoomPanel;
