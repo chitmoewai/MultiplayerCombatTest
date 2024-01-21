@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void RespawnLocation()
     {
-        float randomValue = Random.Range(-1, 1f);
+        float randomValue = Random.Range(-5, 5f);
         localPlayer.transform.localPosition = new Vector3(randomValue, 3f);
     }
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        float randomValue = Random.Range(-2f, 4f);
+        float randomValue = Random.Range(-5f, 5f);
         PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(transform.position.x + randomValue, transform.position.y), Quaternion.identity,0);
 
         SceneCamera.SetActive(false);
@@ -178,7 +178,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (winner != null)
         {
             int maxKillCount = playerKillCounts[winner];
-            Debug.Log($"Player with the maximum kill count: {winner}, Kills: {maxKillCount}");
         }
         else
         {

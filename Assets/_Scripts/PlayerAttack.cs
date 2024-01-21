@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviourPun
         playerMovement = GetComponent<PlayerMovement>();
     }
 
+    //call from GameManager UI
     [PunRPC]
     private void AttackRPC(string attackerName)
     {
@@ -28,19 +29,19 @@ public class PlayerAttack : MonoBehaviourPun
     {
         if (GetComponent<WeaponHolder>().currentWeaponIndex == 0)
         {
-            
             bullets[FindBullet()].GetComponent<Projectile>().speed = 50;
             bullets[FindBullet()].GetComponent<Projectile>().bulletDamage = 5;
-           
+
         }
         if (GetComponent<WeaponHolder>().currentWeaponIndex == 1)
         {
             bullets[FindBullet()].GetComponent<Projectile>().speed = 15;
             bullets[FindBullet()].GetComponent<Projectile>().bulletDamage = 50;
-            
+
         }
         bullets[FindBullet()].transform.position = firePos.position;
-        bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x), attackerName); // as the direction of player is facing
+        bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x), attackerName);
+       
     }
 
     private int FindBullet()
