@@ -103,18 +103,3 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     }
 
 }
-
-
-
-
-//public void CreateGame()
-//{
-//    PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions { MaxPlayers = 3 }, null);
-//}
-
-//public void JoinGame()
-//{
-//    RoomOptions roomOptions = new RoomOptions();
-//    roomOptions.MaxPlayers = 3;
-//    PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text,roomOptions, TypedLobby.Default);
-//}

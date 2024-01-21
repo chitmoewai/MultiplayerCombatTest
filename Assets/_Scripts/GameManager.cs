@@ -113,8 +113,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             for(int i=0; i< players.Length; i++)
             {
-                // If the player is not in the dictionary, add them with an initial kill count of 0
-                if (!playerKillCounts.ContainsKey(players[i].NickName))
+                if (!playerKillCounts.ContainsKey(players[i].NickName)) // If the player is not in the dictionary, add them with an initial kill count of 0
                 {
                     playerKillCounts[players[i].NickName] = 0;
                 }
@@ -124,8 +123,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
     }
+
     // Method to update the kill count for a specific player
-    
     public void UpdateKillCount(string playerName, int newKillCount)
     {
         if (playerKillCounts.ContainsKey(playerName))
@@ -164,7 +163,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         timeUpPanel.SetActive(true);
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
 
         timeUpPanel.SetActive(false);
       

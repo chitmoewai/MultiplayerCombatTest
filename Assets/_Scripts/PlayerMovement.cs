@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviourPun
     public bool DisableInput = false;
 
     private float minX = -35f; 
-    private float maxX = 35f;
+    private float maxX = 38f;
     
     private void Awake()
     {
@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviourPun
    
     void Update()
     {
+        
         if (photonView.IsMine && !DisableInput)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
