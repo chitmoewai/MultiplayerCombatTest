@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviourPun
 
     public Rigidbody2D rb;
     public GameObject character;
-    public BoxCollider2D boxCollider;
+    public Collider2D playerCollider;
     public SpriteRenderer spriteRender;
     public GameObject weaponHolder;
 
@@ -66,7 +66,7 @@ public class PlayerHealth : MonoBehaviourPun
     private void Dead()
     {
         rb.gravityScale = 0;
-        boxCollider.enabled = false;
+        playerCollider.enabled = false;
         spriteRender.enabled = false;
         weaponHolder.SetActive(false);
         character.SetActive(false);
@@ -82,7 +82,7 @@ public class PlayerHealth : MonoBehaviourPun
     private void Respawn()
     {
         rb.gravityScale = 1;
-        boxCollider.enabled = true;
+        playerCollider.enabled = true;
         spriteRender.enabled = true;
         weaponHolder.SetActive(true);
         playerCanvas.SetActive(true);
