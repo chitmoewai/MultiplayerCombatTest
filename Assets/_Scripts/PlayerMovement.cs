@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviourPun
 
     public bool DisableInput = false;
 
-    private float minX = -35f; 
-    private float maxX = 38f;
+    private float minX = -38f; 
+    private float maxX = 40f;
     
     private void Awake()
     {
