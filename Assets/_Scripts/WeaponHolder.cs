@@ -28,8 +28,6 @@ public class WeaponHolder : MonoBehaviourPun
     }
     private void Update()
     {
-        if (!photonView.IsMine)
-            return;
 
         if (Input.GetKeyDown(KeyCode.E))//next Weapon
         {

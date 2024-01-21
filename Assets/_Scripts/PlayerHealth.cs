@@ -34,14 +34,6 @@ public class PlayerHealth : MonoBehaviourPun
         }
     }
 
-  
-    [PunRPC]
-    public void ReduceHealth(float amount, string attackerName)
-    {
-        _killerName = attackerName;
-        ModifyHealth(amount);
-    }
-
     private void CheckHealth()
     {
         fillImage.fillAmount = HealthAmount / 100f;
@@ -60,37 +52,6 @@ public class PlayerHealth : MonoBehaviourPun
     public void EnablePlayerMovementInput()
     {
         playerMovement.DisableInput = false;
-    }
-
-    [PunRPC]
-    private void Dead()
-    {
-        rb.gravityScale = 0;
-        boxCollider.enabled = false;
-        spriteRender.enabled = false;
-        weaponHolder.SetActive(false);
-        character.SetActive(false);
-
-        playerCanvas.SetActive(false);
-
-        if(photonView.IsMine)
-            GameManager.Instance.EnableRespawn();
-
-    }
-
-    [PunRPC]
-    private void Respawn()
-    {
-        rb.gravityScale = 1;
-        boxCollider.enabled = true;
-        spriteRender.enabled = true;
-        weaponHolder.SetActive(true);
-        playerCanvas.SetActive(true);
-        character.SetActive(true);
-
-        fillImage.fillAmount = 1f;
-        HealthAmount = 100;
-
     }
 
     private void ModifyHealth(float amount)
@@ -115,11 +76,52 @@ public class PlayerHealth : MonoBehaviourPun
         photonView.RPC("UpdateKillCount", RpcTarget.AllBuffered, playerName,killCount);// Update kill count for all players
     }
 
+
+
+    [PunRPC]
+    public void ReduceHealth(float amount, string attackerName)
+    {
+        _killerName = attackerName;
+        ModifyHealth(amount);
+    }
+
     [PunRPC]
     void UpdateKillCount(string playerName, int newKillCount)
     {
         killCount = newKillCount;
         GameManager.Instance.UpdateKillCount(playerName, killCount);
+    }
+
+
+    [PunRPC]
+    private void Dead()
+    {
+        rb.gravityScale = 0;
+        boxCollider.enabled = false;
+        spriteRender.enabled = false;
+        weaponHolder.SetActive(false);
+        character.SetActive(false);
+
+        playerCanvas.SetActive(false);
+
+        if (photonView.IsMine)
+            GameManager.Instance.EnableRespawn();
+
+    }
+
+    [PunRPC]
+    private void Respawn()
+    {
+        rb.gravityScale = 1;
+        boxCollider.enabled = true;
+        spriteRender.enabled = true;
+        weaponHolder.SetActive(true);
+        playerCanvas.SetActive(true);
+        character.SetActive(true);
+
+        fillImage.fillAmount = 1f;
+        HealthAmount = 100;
+
     }
 
 
