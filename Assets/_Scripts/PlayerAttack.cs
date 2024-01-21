@@ -13,23 +13,17 @@ public class PlayerAttack : MonoBehaviourPun
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Update()
-    {
-        if (photonView.IsMine)
-        {
-            if (Input.GetMouseButtonDown(0)) { }
-                //photonView.RPC("AttackRPC", RpcTarget.AllBuffered, photonView.Owner.NickName);
-
-        }
-
-    }
-
     [PunRPC]
     private void AttackRPC(string attackerName)
     {
         Attack(attackerName);
     }
 
+    /// <summary>
+    /// for handling the attack logic based on the current weapon.
+    /// ets the direction based on the player's facing direction.
+    /// </summary>
+    /// <param name="attackerName"></param>
     private void Attack(string attackerName)
     {
         if (GetComponent<WeaponHolder>().currentWeaponIndex == 0)

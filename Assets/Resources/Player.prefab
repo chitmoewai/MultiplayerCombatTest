@@ -1662,8 +1662,8 @@ MonoBehaviour:
   playerCanvas: {fileID: 2797990169632862579}
   rb: {fileID: 8647709496807926200}
   character: {fileID: 6087549876179797083}
-  playerCollider: {fileID: 0}
-  spriteRender: {fileID: 0}
+  boxCollider: {fileID: 8139950853403962034}
+  spriteRender: {fileID: 2738015572286525407}
   weaponHolder: {fileID: 2636884811488546039}
 --- !u!114 &8374318838469301490
 MonoBehaviour:

@@ -9,8 +9,7 @@ public class Projectile : MonoBehaviourPun
     public float speed;
     public float bulletDamage;
     private BoxCollider2D boxCollider;
-    
-    private bool hit;
+   
     private float direction; //1 right , -1 left
     private float lifetime;
 
@@ -23,8 +22,6 @@ public class Projectile : MonoBehaviourPun
 
     private void Update()
     {
-        if (hit) return;
-
         if (direction == 1)
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
@@ -33,8 +30,6 @@ public class Projectile : MonoBehaviourPun
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
         }
-        //float movementSpeed = speed * Time.deltaTime * direction;
-        //transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
         if (lifetime > 3) gameObject.SetActive(false); 
@@ -61,7 +56,6 @@ public class Projectile : MonoBehaviourPun
 
     public void SetDirection(float _direction, string attackerName) //use this method everytime shooting a bullet
     {
-        hit = false;
         direction = _direction;
         gameObject.SetActive(true);
         boxCollider.enabled = true;
@@ -74,9 +68,4 @@ public class Projectile : MonoBehaviourPun
 
     }
 
-    [PunRPC]
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
-    }
 }

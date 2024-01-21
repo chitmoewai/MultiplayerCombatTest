@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject winnerPanel;
     public TextMeshProUGUI winnerNameText;
 
-    private Dictionary<string, int> playerKillCounts = new Dictionary<string, int>(); // Dictionary to store kill counts for each player
+    // Dictionary to store kill counts for each player
+    private Dictionary<string, int> playerKillCounts = new Dictionary<string, int>(); 
 
     private void Awake()
     {
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void RespawnLocation()
     {
-        float randomValue = Random.Range(-3, 5f);
+        float randomValue = Random.Range(-1, 1f);
         localPlayer.transform.localPosition = new Vector3(randomValue, 3f);
     }
 
@@ -92,8 +93,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        float randomValue = Random.Range(-1f, 1f);
-        PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(transform.position.x*randomValue, transform.position.y), Quaternion.identity,0);
+        float randomValue = Random.Range(-2f, 4f);
+        PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector2(transform.position.x + randomValue, transform.position.y), Quaternion.identity,0);
 
         SceneCamera.SetActive(false);
     }
